@@ -10,9 +10,9 @@ import java.util.Date;
 @Table(name="products")
 public class Product {
 
-
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank
     @Size(max = 360)
@@ -25,17 +25,16 @@ public class Product {
 
     }
 
-    public Product(String id, String productname, Date expirydate) {
-        this.id = id;
+    public Product(String productname, Date expirydate) {
         this.productname = productname;
         this.expirydate = expirydate;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
