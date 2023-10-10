@@ -1,0 +1,17 @@
+services:
+  mysql:
+    build:
+      context: ./mysql-container
+    container_name: mysql_db
+    ports:
+      - "3306:3306"
+
+  webapi:
+    build:
+      context: ./demoapi2
+    container_name: spring_api
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+
