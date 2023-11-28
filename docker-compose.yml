@@ -8,8 +8,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_DATABASE=demoapidb
-    volumes:
-      - C:/data/mysql:/var/lib/mysql
+#    volumes:
+#      - C:/data/mysql:/var/lib/mysql
     networks:
       - data_api_network
     healthcheck:
