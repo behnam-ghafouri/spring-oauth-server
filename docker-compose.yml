@@ -27,7 +27,7 @@ services:
     command: mysql -hmysql_db -uroot -p'123456'
 
   webapi:
-    image: behnamghafouri/spring-oauth-server-image
+    image: behnamghafouri/spring-oauth-server-image:latest
     container_name: "spring_api"
     depends_on:
       mysql_db:
