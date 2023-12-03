@@ -1,7 +1,7 @@
 FROM maven:3.8.5-openjdk-17 AS builder
 WORKDIR /app
-COPY pom.xml .
-COPY src ./src
+COPY demoapi2/pom.xml .
+COPY demoapi2/src ./src
 RUN mvn package
 
 FROM eclipse-temurin:17-jdk-alpine
