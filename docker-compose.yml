@@ -27,11 +27,11 @@ services:
     command: mysql -hmysql_db -uroot -p'123456'
 
   webapi:
-    image: behnamghafouri/spring-oauth-server-image:latest
+    image: behnamghafouri/spring-oauth-server-image
     container_name: "spring_api"
     depends_on:
       mysql_db:
-      condition: service_healthy
+        condition: service_healthy
     ports:
       - "8080:8080"
     networks:
