@@ -29,7 +29,7 @@ jobs:
         kubeconfig: ${{ secrets.KUBECONFIG }}
 
     - name: setup service and deployment for mysql
-      run: kubectl apply -f /kube/mysql.yaml
+      run: kubectl apply -f kube/mysql.yaml
 
     - name: setup service and deployment for java
-      run: kubectl apply -f /kube/spring_api.yaml
+      run: kubectl apply -f kube/spring_api.yaml
