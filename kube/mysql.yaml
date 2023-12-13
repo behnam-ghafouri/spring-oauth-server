@@ -1,34 +1,41 @@
+# Service
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql_db
+  name: mysqldb
 spec:
   selector:
-    app: mysql_db
+    app: mysqldb
   ports:
     - port: 3306
       targetPort: 3306
+
 ---
+# Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql_db
+  name: mysqldb
 spec:
   selector:
     matchLabels:
-      app: mysql_db
+      app: mysqldb
   template:
     metadata:
       labels:
-        app: mysql_db
+        app: mysqldb
     spec:
       containers:
-        - name: mysql_db
-          image: mysql:8.1.0
+        - name: mysqldb
+          image: mysql:latest
           ports:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: 123456
+              value: "toor"
             - name: MYSQL_DATABASE
               value: demoapidb
+            - name: MYSQL_USER
+              value: "apiuser"
+            - name: MYSQL_PASSWORD
+              value: "123456"

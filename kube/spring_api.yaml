@@ -1,34 +1,42 @@
-# Deployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: spring_api
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: spring_api
-  template:
-    metadata:
-      labels:
-        app: spring_api
-    spec:
-      containers:
-        - name: spring_api
-          image: behnamghafouri/spring-oauth-server-image
-          ports:
-            - containerPort: 8080
-          imagePullPolicy: Always
 # Service
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: spring_api
+  name: springapi
 spec:
   selector:
-    app: spring_api
+    app: springapi
   ports:
     - port: 80
       targetPort: 8080
   type: LoadBalancer
+
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springapi
+  template:
+    metadata:
+      labels:
+        app: springapi
+    spec:
+      containers:
+        - name: springapi
+          image: behnamghafouri/spring-oauth-server-image
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.datasource.url
+              value: "jdbc:mysql://mysqldb:3306/demoapidb?allowPublicKeyRetrieval=true"
+            - name: spring.datasource.user
+              value: "apiuser"
+            - name: spring.datasource.password
+              value: "123456"
+          imagePullPolicy: Always
