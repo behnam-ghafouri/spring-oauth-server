@@ -11,11 +11,8 @@ spec:
   selector:
     app: springapi
   ports:
-    - name: http
-      port: 80
+    - port: 80
       targetPort: 8080
-
-
   type: LoadBalancer
 
 ---
