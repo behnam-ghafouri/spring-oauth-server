@@ -3,16 +3,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: springapi
-  annotations:
-    service.beta.kubernetes.io/azure-load-balancer-internal: "true"  # Update this if needed
-    service.beta.kubernetes.io/azure-load-balancer-ssl-cert: "springapi-tls-secret"
-    service.beta.kubernetes.io/azure-load-balancer-ssl-ports: "443"
 spec:
   selector:
     app: springapi
   ports:
-    - port: 80
-      targetPort: 8080
+    - port: 443
+      targetPort: 443
   type: LoadBalancer
 
 ---
@@ -35,7 +31,7 @@ spec:
         - name: springapi
           image: behnamghafouri/spring-oauth-server-image
           ports:
-            - containerPort: 8080
+            - containerPort: 443
           env:
             - name: spring.datasource.url
               value: "jdbc:mysql://mysqldb:3306/demoapidb?allowPublicKeyRetrieval=true"
@@ -43,4 +39,14 @@ spec:
               value: "apiuser"
             - name: spring.datasource.password
               value: "123456"
+            - name: server.port
+              value: "443"
+            - name: server.ssl.key-store
+              value: "keystore.p12"
+            - name: server.ssl.key-store-password
+              value: "123456"
+            - name: server.ssl.key-store-type
+              value: "PKCS12"
+            - name: server.ssl.key-alias
+              value: "mykey"
           imagePullPolicy: Always
