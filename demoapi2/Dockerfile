@@ -6,6 +6,7 @@ RUN mvn package
 
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
+COPY demoapi2/src/main/resources/keystore.p12 /app/keystore.p12
 COPY --from=builder /app/target/demoapi2-v1.jar /app/app.jar
-EXPOSE 8080
+EXPOSE 443
 CMD ["java", "-jar", "app.jar"]
