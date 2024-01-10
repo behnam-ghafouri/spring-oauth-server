@@ -30,11 +30,13 @@ services:
         condition: service_healthy
     ports:
       - "443:443"
+      - "8080:8080"
     environment:
       spring.datasource.url: "jdbc:mysql://mysqldb:3306/demoapidb?allowPublicKeyRetrieval=true"
       spring.datasource.user: apiuser
       spring.datasource.password: 123456
       server.port: 443
+      server.http.port: 8080
       server.ssl.key-store: keystore.p12
       server.ssl.key-store-password: 123456
       server.ssl.key-store-type: PKCS12

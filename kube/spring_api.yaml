@@ -9,6 +9,8 @@ spec:
   ports:
     - port: 443
       targetPort: 443
+    - port: 8080
+      targetPort: 8080
   type: LoadBalancer
 
 ---
@@ -49,4 +51,6 @@ spec:
               value: "PKCS12"
             - name: server.ssl.key-alias
               value: "mykey"
+            - name: server.http.port
+              value: "8080"
           imagePullPolicy: Always
