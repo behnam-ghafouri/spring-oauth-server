@@ -24,7 +24,7 @@ jobs:
       run: docker push behnamghafouri/spring-oauth-server-image
 
     - name: Set up kubectl
-      uses: azure/k8s-set-context@v1
+      uses: azure/k8s-set-context@v3
       with:
         kubeconfig: ${{ secrets.KUBECONFIG }}
 
