@@ -7,8 +7,12 @@ spec:
   selector:
     app: springapi
   ports:
-    - port: 8080
-      targetPort: 443
+    - name: http
+      port: 80
+      targetPort: 8081
+    - name: https
+      port: 443
+      targetPort: 8081
   type: LoadBalancer
 
 ---
@@ -31,7 +35,7 @@ spec:
         - name: springapi
           image: behnamghafouri/spring-oauth-server-image
           ports:
-            - containerPort: 443
+            - containerPort: 8081
           env:
             - name: spring.datasource.url
               value: "jdbc:mysql://mysqldb:3306/demoapidb?allowPublicKeyRetrieval=true"
@@ -40,15 +44,15 @@ spec:
             - name: spring.datasource.password
               value: "123456"
             - name: server.port
-              value: "443"
-            - name: server.ssl.key-store
-              value: "keystore.p12"
-            - name: server.ssl.key-store-password
-              value: "123456"
-            - name: server.ssl.key-store-type
-              value: "PKCS12"
-            - name: server.ssl.key-alias
-              value: "mykey"
-            - name: server.http.port
-              value: "8080"
+              value: "8081"
+#            - name: server.ssl.key-store
+#              value: "keystore.p12"
+#            - name: server.ssl.key-store-password
+#              value: "123456"
+#            - name: server.ssl.key-store-type
+#              value: "PKCS12"
+#            - name: server.ssl.key-alias
+#              value: "mykey"
+#            - name: server.http.port
+#              value: "8080"
           imagePullPolicy: Always
