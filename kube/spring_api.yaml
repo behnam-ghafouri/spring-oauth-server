@@ -7,9 +7,9 @@ spec:
   selector:
     app: springapi
   ports:
-    - name: http
-      port: 80
-      targetPort: 8081
+#    - name: http
+#      port: 80
+#      targetPort: 8081
     - name: https
       port: 443
       targetPort: 8081
